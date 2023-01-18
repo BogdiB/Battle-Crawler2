@@ -12,6 +12,12 @@ public class Player extends Entity
         this.name = name;
         this.criticalStrikeChance = 5;
         this.coins = 0;
+        this.luck = 5;
+    }
+
+    public String getName()
+    {
+        return this.name;
     }
 
     @Override

@@ -23,7 +23,10 @@ public class Entity implements EntityInterface
             this.baseAttackDamage = 20;
         }
         else
-            throw new RuntimeException("Entity not found. Thank you for playing!\nPlease report this error on my GitHub (BogdiB, repository: BattleCrawler2)");
+        {
+            System.out.println("Entity not found. Thank you for playing!\nPlease report this error on my GitHub (BogdiB, repository: BattleCrawler2).");
+            throw new RuntimeException("Entity not found. Thank you for playing!\nPlease report this error on my GitHub (BogdiB, repository: BattleCrawler2).");
+        }
     }
 
     public short getDamage()
@@ -32,14 +35,31 @@ public class Entity implements EntityInterface
     }
 
     @Override
-    public boolean takeDamage(short damage) // returns 0 if alive, and 1 if not alive - maybe not
+    public void takeDamage(short damage) // returns 0 if alive, and 1 if not alive - maybe not
     {
-        return false;
+        this.currentHP -= damage;
+        if (this.currentHP <= 0)
+            this.dead = true;
+    }
+
+    public void die()
+    {
+        this.dead = true;
     }
 
     @Override
     public boolean isDead()
     {
         return this.dead;
+    }
+
+    public short getCurrentHP()
+    {
+        return this.currentHP;
+    }
+
+    public short getMaxHP()
+    {
+        return this.maxHP;
     }
 }
