@@ -3,7 +3,7 @@ package com.example.battlecrawler2.gamecontents;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Game implements GameInterface
+public class Game implements GameInterface, Runnable
 {
     private static boolean debug_mode;
     private Player player;
@@ -25,6 +25,12 @@ public class Game implements GameInterface
             System.out.println("Debug Mode On\n");
         }
         else throw new IllegalArgumentException("Argument given not boolean (0/1).");
+    }
+
+    @Override
+    public void run()
+    {
+        this.win();
     }
 
     public void start()
@@ -54,7 +60,7 @@ public class Game implements GameInterface
             System.out.println("Enemy took " + dmg + " damage.");
         if (this.enemy.isDead())
         {
-            this.win();
+            this.run();
             return 1;
         }
         dmg = this.enemy.getDamage();
@@ -69,7 +75,7 @@ public class Game implements GameInterface
         return 0;
     }
 
-    public void win()
+    public synchronized void win()
     {
         this.history.add(true);
         this.pity.clear();
@@ -77,7 +83,7 @@ public class Game implements GameInterface
             System.out.println("Game won.\n");
     }
 
-    public void lose()
+    public synchronized void lose()
     {
         this.history.add(false);
         this.pity.add(false);

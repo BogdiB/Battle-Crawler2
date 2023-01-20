@@ -19,7 +19,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -30,7 +29,7 @@ import javafx.stage.Stage;
 
 public class App extends Application
 {
-    private final int width = 800, height = 650; // width is v and height is v1
+    private final short width = 800, height = 650; // width is v and height is v1
     private static Game game;
 
     public static void main(String[] args) throws Exception
@@ -198,5 +197,15 @@ public class App extends Application
 
         // showing after everything is ready
         mainStage.show();
+    }
+
+    public short getWidth()
+    {
+        return this.width;
+    }
+
+    public short getHeight()
+    {
+        return this.height;
     }
 }
